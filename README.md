@@ -50,7 +50,7 @@ Validate HTTP status codes and response bodies
 - Network activity logs
 - Test duration metrics
 
-### Allure Report (Optional)
+### Allure Report
 [![View Allure Report](https://img.shields.io/badge/📈-View_Allure_Report-orange?style=for-the-badge)](https://drive.google.com/file/d/YOUR_ALLURE_REPORT_ID/view?usp=sharing)
 
 **Enhanced Features:**
@@ -146,7 +146,7 @@ cp .env.example .env
 
 ---
 
-## ▶️ Running Tests
+##  Running Tests
 ```bash
 # Run all tests
 npx playwright test
@@ -192,21 +192,16 @@ npx playwright show-report
 
 ### API Test Console Output
 ```
-Test 1: Create User
-============================================================
+Test : 
 ✓ POST Request Sent to: https://jsonplaceholder.typicode.com/users
 ✓ Response Status: 201 Created
 ✓ User ID: 11
 ✓ All validations passed
 
-Test 2: Get User Details
-============================================================
 ✓ GET Request Sent to: https://jsonplaceholder.typicode.com/users/1
 ✓ Response Status: 200 OK
 ✓ User Data Validated
 
-Test 3: Update User
-============================================================
 ✓ PATCH Request Sent to: https://jsonplaceholder.typicode.com/users/1
 ✓ Response Status: 200 OK
 ✓ Updated data validated
@@ -250,7 +245,7 @@ This is a technical assessment project. For questions or feedback, please contac
 
 ---
 
-## 📄 License
+## License
 
 This project is created for educational and assessment purposes.
 
