@@ -24,6 +24,7 @@ export class BookStorePage {
         await this.bookStoreLink.waitFor({ state: 'visible' });
 
         await this.bookStoreLink.click()
+        await this.page.waitForLoadState('domcontentloaded')
     }
 
     async searchBook(bookName: string) {
