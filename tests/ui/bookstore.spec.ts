@@ -28,13 +28,9 @@ test.describe('DemoQA Book Store Tests', () => {
     await loginPage.completeLogin(USERNAME, PASSWORD);
 
     // Step 3: Validate username and logout button are visible
-    const isLoginValid = await loginPage.validateLogin(USERNAME);
-    expect(isLoginValid).toBeTruthy();
-    console.log('Username validated successfully');
-
-    const isLogoutVisible = await loginPage.logoutButton.isVisible();
-    expect(isLogoutVisible).toBeTruthy();
-    console.log('Logout button is visible');
+    await expect(loginPage.loggedInUsername).toHaveText(USERNAME);
+    await expect(loginPage.logoutButton).toBeVisible();
+    console.log('Login validated successfully with username and logout button');
 
     // Step 4: Navigate to Book Store
     await bookStorePage.navigateToBookStore();

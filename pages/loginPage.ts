@@ -7,6 +7,7 @@ export class LoginPage {
     readonly loginButton: Locator;
     readonly logoutButton: Locator;
     readonly loggedInUsername: Locator
+    readonly bookStoreApplicationButton: Locator
 
 
     constructor(page:Page) {
@@ -14,8 +15,9 @@ export class LoginPage {
         this.usernameInput = page.getByPlaceholder('UserName')
         this.passwordInput = page.getByPlaceholder('Password')
         this.loginButton = page.getByRole('button', {name : /login/i})
-        this.logoutButton = page.getByRole('button', {name: /log\s+out/i})
+        this.logoutButton = page.getByRole('button', {name: /log\s?out/i})
         this.loggedInUsername = page.locator('#userName-value')
+        this.bookStoreApplicationButton = page.getByRole('link', {name: 'Book Store Application'});
     }
 
     async fillUsername(username: string) {
@@ -34,14 +36,20 @@ export class LoginPage {
         await this.fillUsername(username)
         await this.fillPassword(password)
         await this.clickLoginButton()
+        await this.page.waitForURL('**/profile', {waitUntil: 'load'})
     }
 
     async clickLogoutButton () {
+        await this.logoutButton.waitFor({state: 'visible'})
         await this.logoutButton.click()
     }
 
     async navigateToLogin() {
-        await this.page.goto('https://demoqa.com/login', {waitUntil: 'domcontentloaded'} )
+        await this.page.goto('https://demoqa.com/', {waitUntil: 'domcontentloaded'})
+        await this.bookStoreApplicationButton.waitFor({state: 'visible'})
+        await this.bookStoreApplicationButton.click()
+        await this.loginButton.waitFor({state:'visible'})
+        await this.loginButton.click()  
     }
 
     async validateLogin(expectedUsername: string) {

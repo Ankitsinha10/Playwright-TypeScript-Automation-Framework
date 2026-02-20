@@ -28,6 +28,7 @@ export class BookStorePage {
 
     async searchBook(bookName: string) {
         await this.searchBox.fill(bookName)
+        await this.searchBox.press('Enter')
     }
 
     async isBookVisble(bookTitle: string){
@@ -38,19 +39,17 @@ export class BookStorePage {
 
     async getBookDetailsFromTable(bookTitle: string) {
         // 1. Find the specific row that contains the book title
+        const row = this.page.locator('tbody tr', { hasText: bookTitle });
         // We use { hasText: bookTitle } to find the exact row
 
-        const row = this.page.locator('.rt-tr-group', {hasText: bookTitle});
+        const cells = row.locator('td');
 
-
-        // 2. Wait for the row to be visible (ensures search is finished)
-        await row.waitFor({state: 'visible'});
 
          // 3. Extract the text from the specific cells (rt-td)
         // Cell 1: Image, Cell 2: Title, Cell 3: Author, Cell 4: Publisher
 
-        const author = await row.locator('.rt-td').nth(2).textContent()
-        const publisher = await row.locator('.rt-td').nth(3).textContent();
+        const author = await cells.nth(2).textContent();
+        const publisher = await cells.nth(3).textContent();
 
         return {
             title: bookTitle,
