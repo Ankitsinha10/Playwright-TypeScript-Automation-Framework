@@ -48,8 +48,9 @@ export class LoginPage {
         await this.page.goto('https://demoqa.com/', {waitUntil: 'domcontentloaded'})
         await this.bookStoreApplicationButton.waitFor({state: 'visible'})
         await this.bookStoreApplicationButton.click()
+        await this.page.waitForLoadState('domcontentloaded')
         await this.loginButton.waitFor({state:'visible'})
-        await this.loginButton.click()  
+        await this.loginButton.click();
     }
 
     async validateLogin(expectedUsername: string) {
